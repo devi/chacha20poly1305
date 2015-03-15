@@ -348,7 +348,9 @@ function aead_mac(polykey, data, ciphertext) {
     for (i = (16 - dpad); i--;) m.push(0);
   }
 
-  m = m.concat(Array.apply([], ciphertext));
+  for(var q = 0; q < ciphertext.length; q++){
+      m.push(ciphertext[q]);
+  }
 
   if (cpad !== 0) {
     for (i = (16 - cpad); i--;) m.push(0);
