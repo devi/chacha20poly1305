@@ -342,15 +342,15 @@ function aead_mac(polykey, data, ciphertext) {
       clen = ciphertext.length,
       dpad = dlen % 16,
       cpad = clen % 16,
-      m = Array.apply([], data), i;
+      m = [], i;
+
+  for (i = 0; i < dlen; i++) m.push(data[i]);
 
   if (dpad !== 0) {
     for (i = (16 - dpad); i--;) m.push(0);
   }
 
-  for(var q = 0; q < ciphertext.length; q++){
-      m.push(ciphertext[q]);
-  }
+  for (i = 0; i < clen; i++) m.push(ciphertext[i]);
 
   if (cpad !== 0) {
     for (i = (16 - cpad); i--;) m.push(0);
